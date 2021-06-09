@@ -1,0 +1,108 @@
+<?php 
+
+
+require 'function.php';
+$information = query ("SELECT * FROM information ORDER BY id ASC");
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://meet.jit.si/external_api.js"></script>
+	<script>
+		$(document).ready(function(){
+		    var domain = "meet.jit.si";
+			var options = {
+				roomName: "JitsiMeetAPIExample",
+				width: 500,
+				height: 500,
+				parentNode: document.querySelector('#meet')
+			}
+		var api = new JitsiMeetExternalAPI(domain, options);
+		});
+	</script>
+	<title>VeriLive</title>
+</head>
+
+<body>
+	<!-- Just an image -->
+	<nav class="navbar navbar-light">
+		<div class="container-fluid">
+		<a class="navbar-brand" href="#">
+			<img src="Logo.png" width="90"  alt="">
+		</a>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="row meet">
+			<div class="col-md-6">
+				<div id="meet"></div>
+			</div>
+			<div class="col-md-6">
+				<div class="card2" style="width: 100%;">
+					<?php foreach ($information as $data) : ?>
+					<img src="img/<?= $data[" gambar "]; ?>
+					</td>
+					<p style="text-align: left; margin-left: 15%;">Nama:
+						<?=$ data[ "name"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">masuk:
+						<?=$ data[ "masuk"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">angkatan:
+						<?=$ data[ "angkatn"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Review:
+						<?=$ data[ "review"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Nama:
+						<?=$ data[ "nama"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">masuk:
+						<?=$ data[ "masuk"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">angkatan:
+						<?=$ data[ "angkatn"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Review:
+						<?=$ data[ "review"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Nama:
+						<?=$ data[ "nama"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">masuk:
+						<?=$ data[ "masuk"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">angkatan:
+						<?=$ data[ "angkatn"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Review:
+						<?=$ data[ "review"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Nama:
+						<?=$ data[ "nama"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">masuk:
+						<?=$ data[ "masuk"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">angkatan:
+						<?=$ data[ "angkatn"]; ?>
+					</p>
+					<p style="text-align: left; margin-left: 15%;">Review:
+						<?=$ data[ "review"]; ?>
+					</p>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p></p>
+</body>
+
+</html>

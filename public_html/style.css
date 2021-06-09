@@ -1,0 +1,47 @@
+
+nav{
+	background-color: #03A2EB;
+}
+
+.meet{
+	margin-top: 10%;
+}
+.card2 {
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+   border-radius: 5px;
+   padding: 20px;
+   width: 50%;
+}
+
+th{
+	background: #03A2EB;
+	color: white;
+}
+
+.font1{
+	font-weight: 400;
+  font-style: normal;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0px;
+  line-height: 1.4;
+  color: #000000;
+  font-size: 23px;
+}
+
+.font2{
+	font-family: "Roboto-Regular", sans-serif;
+  letter-spacing: 0px;
+  line-height: 1.5;
+  color: #000000;
+  font-size: 20px;
+}
+
+.font3{
+	font-weight: 400;
+  font-style: normal;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0px;
+  line-height: 1.4;
+  color: #000000;
+  font-size: 33px;
+}
