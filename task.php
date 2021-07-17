@@ -39,31 +39,10 @@
 <br></br>
 </body>
 
- <script src="app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="app.js"></script>
     <script src="index.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-<script type="text/javascript">
-  var db = firebase.firestore();
-db.collection("Loan Information")
-.get()
-.then(querySnapshot=>{
-        querySnapshot.forEach(doc=>{
-            let data = doc.data();
-            let row  = `<tr>
-                    <td>${data.loan_id}</td>
-                            <td>${data.name}</td>
-                            <td>${data.date}</td>
-                            <td>${data.amount}</td>
-                            <td>${data.status}</td>
-                      </tr>`;
-            let table = document.getElementById('myTable')
-            table.innerHTML += row
-        })
-    })
-    .catch(err=>{
-        console.log(`Error: ${err}`)
-    });
-</script>
-
-   
 </html>
