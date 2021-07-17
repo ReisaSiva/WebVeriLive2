@@ -35,59 +35,72 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 			<div class="col-md-5 center" >
 				<div id="meet" style="margin: auto;"></div>
 			</div>
-			<?php foreach ($information as $data) {}?>
 			<div class="col-md-5" >
 						<form action="#" method="get">
 				<div class="card">
 					<div class="card-body">
-						<div class="card-title">
-							<h4>Personal Information</h4>
-						</div>
-						<hr>
 						<div class="page">
 							<div class="page1">
+								<h3>Personal Information</h3>
+								<hr>
 								<div class="form-group">
 									<label for="" class="font1">Name:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['name']?></p>
+									<p class="font2" id="nama_verif" style="padding-left:20px;box-sizing:border-box;"></p>
 								</div>
 								<div class="form-group">
 									<label for="" class="font1">Order Id:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['id']?></p>
+									<p class="font2" id="orderid_verif"  style="padding-left:20px;box-sizing:border-box;"></p>
 								</div>
 								<div class="form-group">
 									<label for="" class="font1">Phone Number:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['phone']?></p>
+									<p class="font2" id="phone_verif"  style="padding-left:20px;box-sizing:border-box;"></p>
 								</div>
 								<div class="form-group">
 									<label for="" class="font1">Birth Date:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=date('d/M/Y',strtotime($data['birth']))?></p>
+									<p class="font2" id="birthdate_verif" style="padding-left:20px;box-sizing:border-box;"></p>
 								</div>
 								<div class="form-group">
-									<label for="" class="font1">Name:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['name']?></p>
-								</div>
-								<div class="form-group">
-									<label for="" class="font1">Order Id:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['id']?></p>
-								</div>
-								<div class="form-group">
-									<label for="" class="font1">Phone Number:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['phone']?></p>
-								</div>
-								<div class="form-group">
-									<label for="" class="font1">Birth Date:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box; align"><?=date('d/M/Y',strtotime($data['birth']))?></p>
+									<label for="" class="font1">Gender:</label>
+									<br>
+									<input type="radio" name="gender" class="font1" id="male" value="male"> Male
+									<input type="radio" name="gender" class="font1" id="female" value="female"> Female
 								</div>
 							</div>
 							<div class="page2">
+								<h3>Residence Address</h3>
+								<hr>
 								<div class="form-group">
-									<label for="" class="font1">Email:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['email']?></p>
+									<label for="" class="font1">Address:</label>
+									<p class="font2" id="address_user" style="padding-left:20px;box-sizing:border-box;"></p>
 								</div>
 								<div class="form-group">
-									<label for="" class="font1">Password:</label>
-									<p class="font2" style="padding-left:20px;box-sizing:border-box;"><?=$data['password']?></p>
+									<label for="" class="font1">City:</label>
+									<p class="font2" id="city_user" style="padding-left:20px;box-sizing:border-box;"></p>
 								</div>
+								<div class="form-group">
+									<label for="" class="font1">Zipcode:</label>
+									<p class="font2" id="zip_code" style="padding-left:20px;box-sizing:border-box;"></p>
+								</div>
+								<h2>Billing Address</h2>
+								<hr>
+								<div class="form-group">
+									<label for="" class="font1">Address:</label>
+									<p class="font2" id="baddress_user" style="padding-left:20px;box-sizing:border-box;"></p>
+								</div>
+								<div class="form-group">
+									<label for="" class="font1">City:</label>
+									<p class="font2" id="bcity_user" style="padding-left:20px;box-sizing:border-box;"></p>
+								</div>
+								<div class="form-group">
+									<label for="" class="font1">Zipcode:</label>
+									<p class="font2" id="bzip_code" style="padding-left:20px;box-sizing:border-box;"></p>
+								</div>
+								<h3>Comparison Point Address</h3>
+								<hr>
+									<div id="map">
+
+									</div>
+								</form-group>
 							</div>
 						</div>
 					</div>
@@ -105,8 +118,21 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 	</div>
 	<p></p>
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="app.js"></script>
+    <script src="index.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
 	<script src="https://meet.jit.si/external_api.js"></script>
+	<script>
+		getDetailUser("<?=$_GET['id_user']?>");
+		initMap();
+	</script>
 	<script>
 		$(document).ready(function(){
 			$('#back').hide();
@@ -131,7 +157,7 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 			})
 		    var domain = "meet.jit.si";
 			var options = {
-				roomName: "VeriLive",
+				roomName: <?=$_GET['coderoom']?>,
 				height: 800,
 				parentNode: document.querySelector('#meet')
 			}

@@ -30,6 +30,7 @@
 		<th>Order Number</th>
 		<th>Time</th>
 		<th>Status</th>
+		<th>Aksi</th>
 	</tr>
   </thead>
         <tbody id="myTable">
@@ -45,4 +46,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
     <script src="app.js"></script>
     <script src="index.js"></script>
+	<script>
+		data();
+	</script>
 </html>
