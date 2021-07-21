@@ -36,7 +36,6 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 				<div id="meet" style="margin: auto;"></div>
 			</div>
 			<div class="col-md-5" >
-						<form action="#" method="get">
 				<div class="card">
 					<div class="card-body">
 						<div class="page">
@@ -106,11 +105,10 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 						<div id="buttons">
 									<a id="back" class="text-white btn btn-md btn-primary">Back</a>
 									<a id="next" class="text-white btn btn-md btn-primary">Next</a>
-									<button id="process" class="btn btn-md btn-primary">Process</button>
+									<button onClick="processLoan('<?=$_GET['idloan']?>')" class="btn btn-md btn-primary">Process</button>
 						</div>
 					</div>
 				</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -126,7 +124,7 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ"></script>
 	<script src="https://meet.jit.si/external_api.js"></script>
 	<script>
-		getDetailUser("<?=$_GET['id_user']?>");
+		getDetailUser("<?=$_GET['id_user']?>","<?=$_GET['coderoom']?>");
 	</script>
 	<script>
 		$(document).ready(function(){

@@ -18,7 +18,7 @@ function login(){
 }
 
 
-function getDetailUser(id) {
+function getDetailUser(id,code) {
     db.collection("Users").doc(id).get().then((doc) => {
             document.getElementById("nama_verif").innerHTML = doc.data()["personalName"];
             document.getElementById("orderid_verif").innerHTML = id;
@@ -34,7 +34,7 @@ function getDetailUser(id) {
             document.getElementById("city_user").innerHTML = doc.data()["city"];
             document.getElementById("zip_code").innerHTML = doc.data()["zipCode"];
     })
-    db.collection("Users/"+id+"/History Login/").get().then(querySnapshot=>{
+    db.collection("Users/"+id+"/History Login/").where('code','==',code).get().then(querySnapshot=>{
         querySnapshot.forEach((doc)=>{
             if(doc.data()['latitude'] != null){
                 $.post("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ&latlng="+doc.data()["latitude"]+","+doc.data()["longitude"]+"&sensor=false", function(data) {
@@ -70,7 +70,7 @@ db.collection('Loan Information').orderBy("currentDateTime","desc")
                             <td>${data.date}</td>
                             <td>${data.amount}</td>
                             <td>${data.status}</td>
-                            <td><a href="index.php?id_user=${data.user_id}&coderoom=${data.code}">Verifikasi</a></td>
+                            <td><a href="index.php?id_user=${data.user_id}&coderoom=${data.code}&idloan=${doc.id}">Verifikasi</a></td>
                     </tr>`;
                 }
             let table = document.getElementById('myTable')
@@ -103,4 +103,11 @@ db.collection('Loan Information').orderBy("currentDateTime","desc")
             position: position2,
             map: map,
           });
+      }
+
+      function processLoan(id) {
+        db.collection("Loan Information").doc(id).update({
+          status:"Terverifikasi"
+        });
+		   alert("Telah Terverifikasi");
       }
