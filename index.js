@@ -3,7 +3,6 @@ var db = firebase.firestore();
 function login(){
 	var email =  document.getElementById('email').value;
 	var password =  document.getElementById('password').value;
-	console.log(email,password);
     var login = 0;
 	db.collection("Users").where('email','==',email).where('password','==',password).get().then((querySnapshot) => {
 		querySnapshot.forEach((doc) => {
@@ -19,6 +18,9 @@ function login(){
 
 
 function getDetailUser(id,code) {
+   var addressuser;
+   var lat2;
+   var long2;
     db.collection("Users").doc(id).get().then((doc) => {
             document.getElementById("nama_verif").innerHTML = doc.data()["personalName"];
             document.getElementById("orderid_verif").innerHTML = id;
@@ -33,6 +35,7 @@ function getDetailUser(id,code) {
              document.getElementById("address_user").innerHTML = doc.data()["address"];
             document.getElementById("city_user").innerHTML = doc.data()["city"];
             document.getElementById("zip_code").innerHTML = doc.data()["zipCode"];
+            addressuser = doc.data()["address"];
     })
     db.collection("Users/"+id+"/History Login/").where('code','==',code).get().then(querySnapshot=>{
         querySnapshot.forEach((doc)=>{
@@ -41,7 +44,11 @@ function getDetailUser(id,code) {
                         document.getElementById("baddress_user").innerHTML = data.results[0]["formatted_address"];
                         document.getElementById("bcity_user").innerHTML = data.results[11]["formatted_address"];
                     });
-                    initMap(doc.data()["latitude"],doc.data()["longitude"],0,0);
+                    $.post("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ&address="+addressuser+"&sensor=false", function(data) {
+                    lat2 =  data.results[0].geometry.location.lat;
+                    long2 = data.results[0].geometry.location.lng;
+                    initMap(doc.data()["latitude"],doc.data()["longitude"],lat2,long2);
+                    });
             }
         })
     })
@@ -78,7 +85,7 @@ db.collection('Loan Information').orderBy("currentDateTime","desc")
         });
     })
     .catch(err=>{
-        console.log(`Error: ${err}`)
+        // console.log(`Error: ${err}`)
     });
 }
 
@@ -86,11 +93,10 @@ db.collection('Loan Information').orderBy("currentDateTime","desc")
     function initMap(pos1lat,pos1long,pos2lat,pos2long) {
         // The location of Uluru
         const position1 = { lat: parseFloat(pos1lat), lng: parseFloat(pos1long) };
-        const position2 = { lat: pos2lat, lng: pos2long };
-        console.log(position1);
+        const position2 = { lat:  pos2lat, lng:  pos2long };
         // The map, centered at Uluru
         const map = new google.maps.Map(document.getElementById("googleMap"), {
-          zoom: 20,
+          zoom: 15,
           center: position1,
         });
         // The marker, positioned at Uluru
