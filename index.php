@@ -105,7 +105,7 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 						<div id="buttons">
 									<a id="back" class="text-white btn btn-md btn-primary">Back</a>
 									<a id="next" class="text-white btn btn-md btn-primary">Next</a>
-									<button onClick="processLoan('<?=$_GET['idloan']?>')" class="btn btn-md btn-primary">Process</button>
+									<button onClick="processLoan('<?=$_GET['idloan']?>')" id="process" class="btn btn-md btn-primary">Process</button>
 						</div>
 					</div>
 				</div>
@@ -128,8 +128,8 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 	</script>
 	<script>
 		$(document).ready(function(){
-			$('#back').hide();
 			$('#buttons').attr('class','d-flex justify-content-end');
+			$('#back').hide();
 			$('.page2').hide();
 			$('#process').hide();
 			$('#next').on('click',function(){
