@@ -36,10 +36,13 @@ function getDetailUser(id) {
     })
     db.collection("Users/"+id+"/History Login/").get().then(querySnapshot=>{
         querySnapshot.forEach((doc)=>{
-            $.post("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ&latlng="+doc.data()["latitude"]+","+doc.data()["longitude"]+"&sensor=false", function(data) {
-                document.getElementById("baddress_user").innerHTML = data.results[0]["formatted_address"];
-                document.getElementById("bcity_user").innerHTML = data.results[11]["formatted_address"];
-            });
+            if(doc.data()['latitude'] != null){
+                $.post("https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ&latlng="+doc.data()["latitude"]+","+doc.data()["longitude"]+"&sensor=false", function(data) {
+                        document.getElementById("baddress_user").innerHTML = data.results[0]["formatted_address"];
+                        document.getElementById("bcity_user").innerHTML = data.results[11]["formatted_address"];
+                    });
+                    initMap(doc.data()["latitude"],doc.data()["longitude"],0,0);
+            }
         })
     })
 }
@@ -80,17 +83,24 @@ db.collection('Loan Information').orderBy("currentDateTime","desc")
 }
 
 
-    function initMap() {
+    function initMap(pos1lat,pos1long,pos2lat,pos2long) {
         // The location of Uluru
-        const uluru = { lat: -25.344, lng: 131.036 };
+        const position1 = { lat: parseFloat(pos1lat), lng: parseFloat(pos1long) };
+        const position2 = { lat: pos2lat, lng: pos2long };
+        console.log(position1);
         // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4,
-          center: uluru,
+        const map = new google.maps.Map(document.getElementById("googleMap"), {
+          zoom: 20,
+          center: position1,
         });
         // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-          position: uluru,
+        const marker1 = new google.maps.Marker({
+          position: position1,
           map: map,
         });
+
+        const marker2 = new google.maps.Marker({
+            position: position2,
+            map: map,
+          });
       }

@@ -97,9 +97,7 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
 								</div>
 								<h3>Comparison Point Address</h3>
 								<hr>
-									<div id="map">
-
-									</div>
+								<div id="googleMap" style="width:100%;height:380px;"></div>
 								</form-group>
 							</div>
 						</div>
@@ -125,13 +123,10 @@ $information = query ("SELECT * FROM information ORDER BY id ASC");
     <script src="app.js"></script>
     <script src="index.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAC2c9dXuqrmDlIMfESrOGHqw_usMiF0HQ"></script>
 	<script src="https://meet.jit.si/external_api.js"></script>
 	<script>
 		getDetailUser("<?=$_GET['id_user']?>");
-		initMap();
 	</script>
 	<script>
 		$(document).ready(function(){
